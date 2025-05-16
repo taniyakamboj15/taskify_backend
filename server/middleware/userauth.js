@@ -4,7 +4,8 @@ const User = require("../models/UserSchema");
 const userAuth = async (req, res, next) => {
   try {
     const token = req.cookies.token;
-    if (!token) return res.status(401).json({ msg: "Unauthorized" });
+    if (!token)
+      return res.status(401).json({ msg: "Unauthorized", token: token });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(decoded.id).select("-password");
