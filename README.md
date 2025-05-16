@@ -1,7 +1,7 @@
 🚀 **Taskify – Backend API Overview**
 
-🔗 **Live Frontend**: [taskify.taniyakamboj.info](https://taskify.taniyakamboj.info)
-📁 **Frontend Repository**: `github.com/taniyakamboj15/taskify_frontend`
+🔗 **Live Frontend**: [Taskify](https://taskify.taniyakamboj.info)
+📁 **Frontend Repository**: [Go to Frontend](https://github.com/taniyakamboj15/taskify_frontend)
 
 ---
 
