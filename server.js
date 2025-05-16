@@ -17,10 +17,11 @@ const limiter = rateLimit({
 });
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173", "https://taskify.taniyakamboj.info"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };
+
 // Apply rate limiting middleware to all requests
 app.use("/", limiter);
 
