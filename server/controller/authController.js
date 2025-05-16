@@ -8,7 +8,6 @@ const generateOTP = require("../utils/generateOtp");
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
-const isProduction = process.env.NODE_ENV === "production";
 
 exports.register = async (req, res) => {
   const { name, email, country, password } = req.body;
