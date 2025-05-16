@@ -8,6 +8,7 @@ const generateOTP = require("../utils/generateOtp");
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
+const isProduction = process.env.NODE_ENV === "production";
 
 exports.register = async (req, res) => {
   const { name, email, country, password } = req.body;
@@ -23,7 +24,12 @@ exports.register = async (req, res) => {
       password,
     });
     const token = generateToken(user._id);
-    res.cookie("token", token, { path: "/", httpOnly: true });
+    res.cookie("token", token, {
+      path: "/",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    });
     const { password: _, ...userWithoutPassword } = user._doc;
     res
       .status(201)
@@ -119,7 +125,12 @@ exports.login = async (req, res) => {
 
     await user.save();
     const token = generateToken(user._id);
-    res.cookie("token", token, { path: "/", httpOnly: true });
+    res.cookie("token", token, {
+      path: "/",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    });
     const { password: _, ...userWithoutPassword } = user._doc;
     res
       .status(201)
@@ -152,8 +163,12 @@ exports.firebaseLogin = async (req, res) => {
     await user.save();
 
     const appToken = generateToken(user._id);
-
-    res.cookie("token", appToken, { path: "/", httpOnly: true });
+    res.cookie("token", appToken, {
+      path: "/",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    });
     res.status(201).json({ msg: "Login Successfull ", data: user });
   } catch (err) {
     console.error(err);
