@@ -115,10 +115,7 @@ EMAIL_PASS=your_email_password
 npm run start
 ```
 
----
 
-
-```
 
 ---
 
